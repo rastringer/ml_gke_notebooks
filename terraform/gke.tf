@@ -51,6 +51,7 @@ resource "google_container_node_pool" "gpu_nodes" {
     }
 
     # Important for GPU workload support
+    service_account = google_service_account.gke_node_sa.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
