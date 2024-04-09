@@ -170,7 +170,7 @@ cython_debug/
 .terraform.lock.hcl
 
 # Ignore the temporary .terraform directory created by Terraform 
-/.terraform/
+.terraform/
 
 # Ignore temporary folders for modules when using 'terraform get'
 /.terraform.modules/
