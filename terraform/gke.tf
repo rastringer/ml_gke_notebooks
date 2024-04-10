@@ -48,6 +48,11 @@ resource "google_container_node_pool" "gpu_nodes" {
     guest_accelerator {
       count = 1
       type  = var.accelerator_type # Type of GPU
+      # Allows multiple containers to share the same GPU
+      gpu_sharing_config {
+        gpu_sharing_strategy = "TIME_SHARING"
+        max_shared_clients_per_gpu = 4
+      }
     }
 
     # Important for GPU workload support
@@ -56,4 +61,5 @@ resource "google_container_node_pool" "gpu_nodes" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
+  depends_on = [time_sleep.apis_propagation]
 }
