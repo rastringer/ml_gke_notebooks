@@ -31,6 +31,18 @@ resource "google_container_cluster" "gke_ml_cluster" {
     }
   }
 
+  # Enable Workload Identity
+  workload_identity_config {
+    workload_pool = "${var.project_id}.svc.id.goog"
+  }
+
+  # Enable Cloud Storage Fuse
+  addons_config {
+    gcs_fuse_csi_driver_config {
+      enabled = true
+    }
+  }
+
   depends_on = [time_sleep.apis_propagation]
 }
 
